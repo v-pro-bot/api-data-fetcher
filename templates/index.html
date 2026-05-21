@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Fetcher</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none">
+            <rect
+              x="2"
+              y="4"
+              width="16"
+              height="12"
+              rx="2"
+              stroke="#0d1117"
+              stroke-width="1.5"
+            />
+            <path
+              d="M5 8l3 2.5L5 13"
+              stroke="#0d1117"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M10 13h5"
+              stroke="#0d1117"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <div>
+          <h1 class="title">API<span>Fetcher</span></h1>
+          <p class="subtitle">$ public api explorer — powered by me</p>
+        </div>
+      </header>
+
+      <!-- Tabs -->
+      <nav class="tabs" role="tablist" aria-label="API categories">
+        <button
+          class="tab active"
+          role="tab"
+          aria-selected="true"
+          data-tab="weather"
+          onclick="switchTab('weather', this)"
+        >
+          <i class="ti ti-cloud" aria-hidden="true"></i>Weather
+        </button>
+        <button
+          class="tab"
+          role="tab"
+          aria-selected="false"
+          data-tab="movie"
+          onclick="switchTab('movie', this)"
+        >
+          <i class="ti ti-movie" aria-hidden="true"></i>Movies
+        </button>
+      </nav>
+
+      <!-- Input -->
+      <div class="input-area">
+        <div class="input-row">
+          <span class="prompt-label" aria-hidden="true">~$</span>
+          <input
+            class="term-input"
+            id="userInput"
+            type="text"
+            placeholder="london"
+            autocomplete="off"
+            aria-label="Search query"
+            onkeydown="if (event.key === 'Enter') fetchData();"
+          />
+          <button
+            class="fetch-btn"
+            id="fetchBtn"
+            onclick="fetchData()"
+            aria-label="Execute query"
+          >
+            <i class="ti ti-terminal-2" aria-hidden="true"></i>Execute
+          </button>
+        </div>
+        <p class="hint" id="hintText">
+          <span class="hint-keyword">tip:</span> enter a city name like "tokyo"
+          or "new york"
+        </p>
+      </div>
+
+      <!-- Output Panel -->
+      <section
+        class="output-panel"
+        aria-live="polite"
+        aria-label="API response"
+      >
+        <div class="panel-bar">
+          <div class="panel-dots" aria-hidden="true">
+            <div class="dot d-red"></div>
+            <div class="dot d-amber"></div>
+            <div class="dot d-green"></div>
+          </div>
+          <span class="panel-label" id="panelLabel">stdout</span>
+          <span class="panel-status" id="panelStatus"></span>
+        </div>
+        <div class="output-body" id="outputBody">
+          <div class="idle-msg">
+            <i class="ti ti-terminal" aria-hidden="true"></i>
+            <p>awaiting input — pick a category and run a query</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <span>backend: <code>Python 3 + Flask</code></span>
+        <span>apis: <code>OpenWeatherMap</code> · <code>OMDB</code></span>
+      </footer>
+    </div>
+    <!-- /container -->
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
